@@ -10,8 +10,9 @@ import (
 )
 
 type CLI struct {
-	OciRef  string `arg:"" name:"oci-ref" help:"OCI image reference"`
-	Verbose int    `short:"v" type:"counter" help:"Enable verbose mode"`
+	OciRef  string            `arg:"" name:"oci-ref" help:"OCI image reference"`
+	Verbose int               `short:"v" type:"counter" help:"Enable verbose mode"`
+	Files   map[string]string `short:"f" placeholder:"src=dest;..." help:"Add a file to the rootfs"`
 }
 
 func (c CLI) Run(logger *slog.Logger) error {
@@ -23,6 +24,18 @@ func (c CLI) Run(logger *slog.Logger) error {
 	)
 	if err != nil {
 		return err
+	}
+
+	err = rfs.Build()
+	if err != nil {
+		return err
+	}
+
+	for src, dst := range c.Files {
+		err = rfs.AddFile(src, dst)
+		if err != nil {
+			return err
+		}
 	}
 
 	err = rfs.Create()
