@@ -147,7 +147,9 @@ func (r *rootFS) downloadExtractLayers() error {
 		if err != nil {
 			return err
 		}
-		fmt.Println()
+		if r.logger.Enabled(context.TODO(), slog.LevelInfo) {
+			fmt.Println()
+		}
 
 		r.logger.Debug("Extracting layer", slog.String("digest", layer.Digest.Encoded()))
 		err = extractLayer(bs, r.buildDir)

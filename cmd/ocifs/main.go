@@ -1,7 +1,6 @@
 package main
 
 import (
-	"io"
 	"log/slog"
 	"runtime"
 
@@ -44,7 +43,7 @@ func main() {
 
 	switch cli.Verbose {
 	case 0:
-		opts = append(opts, shandler.WithStdOut(io.Discard), shandler.WithStdErr(io.Discard))
+		opts = append(opts, shandler.WithLogLevel(shandler.LevelFatal))
 	case 1:
 		opts = append(opts, shandler.WithLogLevel(slog.LevelError))
 	case 2:
