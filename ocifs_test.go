@@ -1,4 +1,4 @@
-package rootfs
+package ocifs
 
 import (
 	"log/slog"

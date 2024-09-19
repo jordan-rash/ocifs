@@ -1,13 +1,13 @@
-module ocilayers/cmd
+module disorder.dev/ocifs/cmd/ocifs
 
 go 1.23.0
 
-replace ocilayers => ../
+replace disorder.dev/ocifs => ../..
 
 require (
+	disorder.dev/ocifs v0.0.0-00010101000000-000000000000
 	disorder.dev/shandler v0.0.0-20240826142832-c3d20720c9db
 	github.com/alecthomas/kong v1.2.1
-	ocilayers v0.0.0-00010101000000-000000000000
 )
 
 require (

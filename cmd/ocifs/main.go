@@ -3,9 +3,9 @@ package main
 import (
 	"io"
 	"log/slog"
-	rootfs "ocilayers"
 	"runtime"
 
+	"disorder.dev/ocifs"
 	"disorder.dev/shandler"
 	"github.com/alecthomas/kong"
 )
@@ -18,9 +18,9 @@ type CLI struct {
 func (c CLI) Run(logger *slog.Logger) error {
 	libLogger := logger.WithGroup("rootfs")
 
-	rfs, err := rootfs.NewRootFS(c.OciRef,
-		rootfs.WithLogger(libLogger),
-		rootfs.WithOSArch(runtime.GOOS, runtime.GOARCH),
+	rfs, err := ocifs.NewRootFS(c.OciRef,
+		ocifs.WithLogger(libLogger),
+		ocifs.WithOSArch(runtime.GOOS, runtime.GOARCH),
 	)
 	if err != nil {
 		return err
